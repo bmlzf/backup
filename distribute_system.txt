@@ -1,0 +1,38 @@
+###############################################
+# order的问题
+###############################################
+
+1. timestamp
+2. sequence in centralized distributed system
+
+###############################################
+# read/write conflict的问题
+###############################################
+
+1. read with zxid
+2. write together with zxid
+3. compare read/write zxid
+4. if conflicts, how to handle?
+
+###############################################
+# synchronize/async的问题
+###############################################
+
+1. async: eventually consistency
+2. sync: performance
+
+###############################################
+# fail-over的问题
+###############################################
+
+1. master/leader node failure: how to elect and switch
+
+
+
+###############################################
+# 知名分布式系统
+###############################################
+
+1. 配置管理: zookeeper
+2. 日志管理: flume
+3. gossip协议: Cassandra和Flume都基于gossip实现

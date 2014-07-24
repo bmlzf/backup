@@ -1,0 +1,274 @@
+如何判断可执行文件是否携带了调试信息？
+
+########################################################
+# readelf --debug-dump filename
+########################################################
+
+########################################################
+# readelf -S filename
+# objdump -h a.out
+########################################################
+
+objdump -h a.out
+
+-----------------------------------------------
+- Debug版的文件查询输出
+-----------------------------------------------
+
+[root@IWSVA55DEV src_log]# readelf -S a.out
+There are 37 section headers, starting at offset 0x10cc:
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .interp           PROGBITS        08048134 000134 000013 00   A  0   0  1
+  [ 2] .note.ABI-tag     NOTE            08048148 000148 000020 00   A  0   0  4
+  [ 3] .hash             HASH            08048168 000168 000040 04   A  4   0  4
+  [ 4] .dynsym           DYNSYM          080481a8 0001a8 0000b0 10   A  5   1  4
+  [ 5] .dynstr           STRTAB          08048258 000258 0000c1 00   A  0   0  1
+  [ 6] .gnu.version      VERSYM          0804831a 00031a 000016 02   A  4   0  2
+  [ 7] .gnu.version_r    VERNEED         08048330 000330 000040 00   A  5   2  4
+  [ 8] .rel.dyn          REL             08048370 000370 000008 08   A  4   0  4
+  [ 9] .rel.plt          REL             08048378 000378 000038 08   A  4  11  4
+  [10] .init             PROGBITS        080483b0 0003b0 000017 00  AX  0   0  4
+  [11] .plt              PROGBITS        080483c8 0003c8 000080 04  AX  0   0  4
+  [12] .text             PROGBITS        08048448 000448 0001fc 00  AX  0   0  4
+  [13] .fini             PROGBITS        08048644 000644 00001a 00  AX  0   0  4
+  [14] .rodata           PROGBITS        08048660 000660 000018 00   A  0   0  4
+  [15] .eh_frame_hdr     PROGBITS        08048678 000678 000014 00   A  0   0  4
+  [16] .eh_frame         PROGBITS        0804868c 00068c 00003c 00   A  0   0  4
+  [17] .ctors            PROGBITS        080496c8 0006c8 000008 00  WA  0   0  4
+  [18] .dtors            PROGBITS        080496d0 0006d0 000008 00  WA  0   0  4
+  [19] .jcr              PROGBITS        080496d8 0006d8 000004 00  WA  0   0  4
+  [20] .dynamic          DYNAMIC         080496dc 0006dc 0000e0 08  WA  5   0  4
+  [21] .got              PROGBITS        080497bc 0007bc 000004 04  WA  0   0  4
+  [22] .got.plt          PROGBITS        080497c0 0007c0 000028 04  WA  0   0  4
+  [23] .data             PROGBITS        080497e8 0007e8 00000c 00  WA  0   0  4
+  [24] .bss              NOBITS          080497f4 0007f4 000004 00  WA  0   0  4
+  [25] .comment          PROGBITS        00000000 0007f4 000111 00      0   0  1
+  [26] .debug_aranges    PROGBITS        00000000 000905 000020 00      0   0  1
+  [27] .debug_pubnames   PROGBITS        00000000 000925 00001b 00      0   0  1
+  [28] .debug_info       PROGBITS        00000000 000940 00041c 00      0   0  1
+  [29] .debug_abbrev     PROGBITS        00000000 000d5c 000127 00      0   0  1
+  [30] .debug_line       PROGBITS        00000000 000e83 00007e 00      0   0  1
+  [31] .debug_frame      PROGBITS        00000000 000f04 000030 00      0   0  4
+  [32] .debug_str        PROGBITS        00000000 000f34 00001e 00      0   0  1
+  [33] .debug_loc        PROGBITS        00000000 000f52 00002c 00      0   0  1
+  [34] .shstrtab         STRTAB          00000000 000f7e 00014d 00      0   0  1
+  [35] .symtab           SYMTAB          00000000 001694 000540 10     36  53  4
+  [36] .strtab           STRTAB          00000000 001bd4 0002a4 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings)
+  I (info), L (link order), G (group), x (unknown)
+  O (extra OS processing required) o (OS specific), p (processor specific)
+
+-----------------------------------------------
+- Release版的文件查询输出
+-----------------------------------------------
+There are 29 section headers, starting at offset 0x9ec:
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .interp           PROGBITS        08048134 000134 000013 00   A  0   0  1
+  [ 2] .note.ABI-tag     NOTE            08048148 000148 000020 00   A  0   0  4
+  [ 3] .hash             HASH            08048168 000168 000040 04   A  4   0  4
+  [ 4] .dynsym           DYNSYM          080481a8 0001a8 0000b0 10   A  5   1  4
+  [ 5] .dynstr           STRTAB          08048258 000258 0000c1 00   A  0   0  1
+  [ 6] .gnu.version      VERSYM          0804831a 00031a 000016 02   A  4   0  2
+  [ 7] .gnu.version_r    VERNEED         08048330 000330 000040 00   A  5   2  4
+  [ 8] .rel.dyn          REL             08048370 000370 000008 08   A  4   0  4
+  [ 9] .rel.plt          REL             08048378 000378 000038 08   A  4  11  4
+  [10] .init             PROGBITS        080483b0 0003b0 000017 00  AX  0   0  4
+  [11] .plt              PROGBITS        080483c8 0003c8 000080 04  AX  0   0  4
+  [12] .text             PROGBITS        08048448 000448 0001fc 00  AX  0   0  4
+  [13] .fini             PROGBITS        08048644 000644 00001a 00  AX  0   0  4
+  [14] .rodata           PROGBITS        08048660 000660 000018 00   A  0   0  4
+  [15] .eh_frame_hdr     PROGBITS        08048678 000678 000014 00   A  0   0  4
+  [16] .eh_frame         PROGBITS        0804868c 00068c 00003c 00   A  0   0  4
+  [17] .ctors            PROGBITS        080496c8 0006c8 000008 00  WA  0   0  4
+  [18] .dtors            PROGBITS        080496d0 0006d0 000008 00  WA  0   0  4
+  [19] .jcr              PROGBITS        080496d8 0006d8 000004 00  WA  0   0  4
+  [20] .dynamic          DYNAMIC         080496dc 0006dc 0000e0 08  WA  5   0  4
+  [21] .got              PROGBITS        080497bc 0007bc 000004 04  WA  0   0  4
+  [22] .got.plt          PROGBITS        080497c0 0007c0 000028 04  WA  0   0  4
+  [23] .data             PROGBITS        080497e8 0007e8 00000c 00  WA  0   0  4
+  [24] .bss              NOBITS          080497f4 0007f4 000004 00  WA  0   0  4
+  [25] .comment          PROGBITS        00000000 0007f4 000111 00      0   0  1
+  [26] .shstrtab         STRTAB          00000000 000905 0000e5 00      0   0  1
+  [27] .symtab           SYMTAB          00000000 000e74 0004c0 10     28  45  4
+  [28] .strtab           STRTAB          00000000 001334 0002a4 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings)
+  I (info), L (link order), G (group), x (unknown)
+  O (extra OS processing required) o (OS specific), p (processor specific)
+
+########################################################
+# nm: nm -a filename
+########################################################
+
+-----------------------------------------------
+- Debug版的文件查询输出
+-----------------------------------------------
+08048134 r 
+08048148 r 
+08048168 r 
+080481a8 r 
+08048258 r 
+0804831a r 
+08048330 r 
+08048370 r 
+08048378 r 
+080483b0 t 
+080483c8 t 
+08048448 t 
+08048644 t 
+08048660 r 
+08048678 r 
+0804868c r 
+080496c8 d 
+080496d0 d 
+080496d8 d 
+080496dc d 
+080497bc d 
+080497c0 d 
+080497e8 d 
+080497f4 b 
+00000000 n 
+00000000 N 
+00000000 N 
+00000000 N 
+00000000 N 
+00000000 N 
+00000000 N 
+00000000 N 
+00000000 N 
+00000000 a 
+00000000 a 
+00000000 a 
+080497f4 A __bss_start
+0804846c t call_gmon_start
+080497f4 b completed.1
+00000000 a crtstuff.c
+00000000 a crtstuff.c
+080496cc d __CTOR_END__
+080496c8 d __CTOR_LIST__
+080497e8 D __data_start
+080497e8 W data_start
+08048620 t __do_global_ctors_aux
+08048490 t __do_global_dtors_aux
+080497ec D __dso_handle
+080496d4 d __DTOR_END__
+080496d0 d __DTOR_LIST__
+080496dc D _DYNAMIC
+080497f4 A _edata
+080497f8 A _end
+08048644 T _fini
+080496c8 A __fini_array_end
+080496c8 A __fini_array_start
+08048660 R _fp_hw
+080484c4 t frame_dummy
+080486c4 r __FRAME_END__
+080497c0 D _GLOBAL_OFFSET_TABLE_
+         w __gmon_start__
+         U __gxx_personality_v0@@CXXABI_1.3
+080483b0 T _init
+080496c8 A __init_array_end
+080496c8 A __init_array_start
+08048664 R _IO_stdin_used
+080496d8 d __JCR_END__
+080496d8 d __JCR_LIST__
+         w _Jv_RegisterClasses
+080485dc T __libc_csu_fini
+08048588 T __libc_csu_init
+         U __libc_start_main@@GLIBC_2.0
+         U localtime@@GLIBC_2.0
+080484f0 T main
+         U memset@@GLIBC_2.0
+080497f0 d p.0
+080496c8 A __preinit_array_end
+080496c8 A __preinit_array_start
+         U printf@@GLIBC_2.0
+08048448 T _start
+         U strftime@@GLIBC_2.0
+00000000 a test.cpp
+         U time@@GLIBC_2.0
+
+-----------------------------------------------
+- Release版的文件查询输出
+-----------------------------------------------
+08048134 r 
+08048148 r 
+08048168 r 
+080481a8 r 
+08048258 r 
+0804831a r 
+08048330 r 
+08048370 r 
+08048378 r 
+080483b0 t 
+080483c8 t 
+08048448 t 
+08048644 t 
+08048660 r 
+08048678 r 
+0804868c r 
+080496c8 d 
+080496d0 d 
+080496d8 d 
+080496dc d 
+080497bc d 
+080497c0 d 
+080497e8 d 
+080497f4 b 
+00000000 n 
+00000000 a 
+00000000 a 
+00000000 a 
+080497f4 A __bss_start
+0804846c t call_gmon_start
+080497f4 b completed.1
+00000000 a crtstuff.c
+00000000 a crtstuff.c
+080496cc d __CTOR_END__
+080496c8 d __CTOR_LIST__
+080497e8 D __data_start
+080497e8 W data_start
+08048620 t __do_global_ctors_aux
+08048490 t __do_global_dtors_aux
+080497ec D __dso_handle
+080496d4 d __DTOR_END__
+080496d0 d __DTOR_LIST__
+080496dc D _DYNAMIC
+080497f4 A _edata
+080497f8 A _end
+08048644 T _fini
+080496c8 A __fini_array_end
+080496c8 A __fini_array_start
+08048660 R _fp_hw
+080484c4 t frame_dummy
+080486c4 r __FRAME_END__
+080497c0 D _GLOBAL_OFFSET_TABLE_
+         w __gmon_start__
+         U __gxx_personality_v0@@CXXABI_1.3
+080483b0 T _init
+080496c8 A __init_array_end
+080496c8 A __init_array_start
+08048664 R _IO_stdin_used
+080496d8 d __JCR_END__
+080496d8 d __JCR_LIST__
+         w _Jv_RegisterClasses
+080485dc T __libc_csu_fini
+08048588 T __libc_csu_init
+         U __libc_start_main@@GLIBC_2.0
+         U localtime@@GLIBC_2.0
+080484f0 T main
+         U memset@@GLIBC_2.0
+080497f0 d p.0
+080496c8 A __preinit_array_end
+080496c8 A __preinit_array_start
+         U printf@@GLIBC_2.0
+08048448 T _start
+         U strftime@@GLIBC_2.0
+00000000 a test.cpp
+         U time@@GLIBC_2.0

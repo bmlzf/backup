@@ -1,0 +1,7 @@
+http://spark.incubator.apache.org/docs/latest/quick-start.html
+
+http://spark.incubator.apache.org/documentation.html
+
+Running spark on mesos: https://github.com/mesos/spark/wiki/Running-spark-on-mesos
+
+Running Spark on Amazon EC2: https://github.com/mesos/spark/wiki/Running-Spark-on-Amazon-EC2

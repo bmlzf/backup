@@ -1,0 +1,2 @@
+1. http://gitref.org
+2. http://git-scm.com/book

@@ -1,0 +1,56 @@
+########################################
+# 
+########################################
+
+1. Differences between process/thread
+	Major switch
+	Minor switch
+
+Questions:
+in main() function, pthread_create() 5 times, then how many threads there are in total
+
+2. Architecture differences between Hyper-threading & multi-core & SMP
+	Hyper-threading: 2 threads, same process
+	multi-core: 2 threads, same process
+	SMP: different process
+
+
+3. Interrupt
+
+4. select, poll, pselect
+
+5. what's is virtual memory, explaning it
+	Lazy allocation, only on linux, not windows
+
+6. how to load shared libraries
+
+########################################
+# Linux OS
+########################################
+
+1. what about /proc, not physical file but kernel function call
+2. how to check cpu/memopry info
+3. swap partition
+
+
+########################################
+# Programming/project
+########################################
+
+1. what kind of tool to debug? how to detect memory leak? to do unit test
+memory leak:
+	- tool: valgrind
+	- mtrace
+
+2. what will happen to following code
+void f(int j)
+{
+    f(j++)
+}
+
+int main(int argc, char** argv)
+{
+    f(0)
+}
+
+infinite loop & stack overflow (run out of frames)
